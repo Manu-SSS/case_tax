@@ -1,0 +1,57 @@
+ +----------------------+
+ |   Definir Termos de  | 
+ |       Busca          |
+ +----------+-----------+
+            |
+            v
+ +----------+-----------+
+ |   Coleta de IDs dos  | 
+ |        Itens         |
+ +----------+-----------+
+            |
+            v
+ +----------+-----------+
+ | Coleta de Detalhes   |
+ |      dos Itens       |
+ +----------+-----------+
+            |
+            v
+ +----------+-----------+
+ |   Armazenamento dos  |
+ |     Dados em CSV     |
+ +----------+-----------+
+            |
+            v
+ +----------+-----------+
+ | Análise Exploratoria |
+ |                      |
+ +----------------------+
+
+Documentação dos Passos
+1. Definir Termos de Busca:
+Escolha os termos de busca que são relevantes para a análise.
+Para este exemplo: 'Xiaomi Chromecast', 'Google Home', 'Apple TV', 'Amazon Fire TV'.
+
+2. Coleta de IDs dos Itens:
+Enviar requisições GET para https://api.mercadolibre.com/sites/MLA/search?q=<termo>&limit=50.
+Iterar sobre os resultados e coletar os IDs dos itens.
+
+3. Coleta de Detalhes dos Itens:
+Para cada ID coletado, enviar requisições GET para https://api.mercadolibre.com/items/{Item_Id}.
+curl --location 'https://api.mercadolibre.com/items/MLB1828680414' \
+--header 'Authorization: TEST-6489612012985364-052415-a8cbe516bf2af6c109b5d36c4dac6d71-790512386'
+
+4. Escolha e extração os campos de interesse: 
+'id', 'site_id', 'title', 'seller_id', 'category_id', 'price', 'initial_quantity', 'condition', 'base_price', 'brand', 'generation', 'model'
+
+Armazenamento dos Dados: 'mercadolivre_items_details.csv'
+
+Análise Exploratoria:
+
+Carregar o arquivo CSV em um Jupyter Notebook.
+Realizar análises estatísticas e visualizações para entender melhor a oferta de produtos.
+- Quantidade de modelos por marca.
+- Quantidade disponível por modelo dividido por marca.
+- Média de preço por modelo de cada marca.
+- Três modelos mais comuns (maior disponibilidade) de cada marca.
+- Três modelos mais baratos (média de preço por modelo) de cada marca.
